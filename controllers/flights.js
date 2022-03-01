@@ -5,16 +5,19 @@ function newFlight(req, res) {
 }
 
 function create(req, res) {
-  console.log("check check check crerate");
   const flight = new Flight(req.body);
   flight.save(function (err) {
     if (err) return res.redirect("/flights/new");
-    res.redirect("/movies/new");
+    res.redirect("/flights/new");
   });
 }
 
 function index(req, res) {
-  console.log("sanity check");
+  Flight.find({}, function (error, flights) {
+    res.render("flights/index", {
+      flights,
+    });
+  });
 }
 
 export { newFlight as new, create, index };
