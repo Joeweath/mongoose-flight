@@ -1,11 +1,9 @@
-import { Router } from 'express'
-const router = Router()
+import { Router } from "express";
+const router = Router();
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' })
-})
+router.get("/", function (req, res) {
+  res.render("index", { title: "Flights" });
+});
 
-export { 
-  router
-}
+export { router };
