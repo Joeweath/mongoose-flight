@@ -20,20 +20,16 @@
       </a>
     </div>
   </section>
-  <%# start cast list %>
   <div>Meals:</div>
   <ul>
     <% flight.allMeals.forEach(food => { %>
       <li><%= food.name %></li>
     <% }) %>
   </ul>
-  <%# end cast list %>
 </section>
-	
-<%# add to cast form below this comment %>
-<form id="add-per-to-meal" action="???" method="POST">
-  <select name="MealId">
-    <% Meal.forEach(food => { %>
+<form id="add-per-to-meal" action="/flights/<%= flight._id %>/meals" method="POST">
+  <select name="mealId">
+    <% meals.forEach(food => { %>
       <option value="<%= food._id %>"><%= food.name %></option>
     <% }) %>
   </select>

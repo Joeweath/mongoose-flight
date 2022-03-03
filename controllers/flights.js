@@ -8,6 +8,10 @@ function newFlight(req, res) {
 }
 
 function create(req, res) {
+  for (let key in req.body) {
+    if (req.body[key] === "") delete req.body[key];
+  }
+  console.log(req.body);
   const flight = new Flight(req.body);
   flight.save(function (err) {
     if (err) return res.redirect("/flights/new");
@@ -28,10 +32,15 @@ function show(req, res) {
   Flight.findById(req.params.id)
     .populate("allMeals")
     .exec(function (err, flight) {
-      res.render("flights/show", {
-        title: "Flight Detail",
-        flight: flight,
-        Meal: Meal,
+      console.log(flight);
+      Meal.find({ _id: { $nin: flight.allMeals } }, function (error, meals) {
+        // console.log(meals);
+
+        res.render("flights/show", {
+          title: "Flight Detail",
+          flight: flight,
+          meals: meals,
+        });
       });
     });
 }
@@ -68,10 +77,13 @@ function createTicket(req, res) {
 }
 
 function addToMeal(req, res) {
+  console.log(req.body.mealId);
   Flight.findById(req.params.id, function (err, flight) {
-    flight.cast.push(req.body.mealId);
+    flight.allMeals.push(req.body.mealId);
+    console.log("flight", flight);
     flight.save(function (err) {
-      res.redirect(`/flights/${flight._id}`);
+      console.log("error", err);
+      res.redirect(`/flights/${req.params.id}`);
     });
   });
 }

@@ -33,7 +33,10 @@ const flightScehma = new Schema(
     departs: {
       type: Date,
       default: function () {
-        return Date.now() + 365 * 24 * 60 * 60000;
+        const d = new Date();
+        d.setFullYear(d.getFullYear() + 1);
+        console.log(d);
+        return d;
       },
     },
     ticket: [ticketSchema],
