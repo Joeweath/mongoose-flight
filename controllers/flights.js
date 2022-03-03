@@ -49,13 +49,18 @@ function edit(req, res) {
 }
 
 function update(req, res) {
-  Flight.findByIdAndUpdate(req.params.id, req.body, function (err, movie) {
+  Flight.findByIdAndUpdate(req.params.id, req.body, function (err, flight) {
     res.redirect(`/flights/${req.params.id}`);
   });
 }
 
 function createTicket(req, res) {
-  console.log("sanity check");
+  Flight.findById(req.params.id, function (err, flight) {
+    flight.ticket.push(req.body);
+    flight.save(function (err) {
+      res.redirect(`/flights/${req.params.id}`);
+    });
+  });
 }
 
 export {
