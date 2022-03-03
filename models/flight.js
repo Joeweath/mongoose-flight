@@ -37,6 +37,7 @@ const flightScehma = new Schema(
       },
     },
     ticket: [ticketSchema],
+    allMeals: [{ type: Schema.Types.ObjectId, ref: "Meal" }],
   },
 
   {
