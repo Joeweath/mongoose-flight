@@ -8,11 +8,17 @@ router.get("/", flightsCtrl.index);
 // GET - localhost:3000
 router.get("/new", flightsCtrl.new);
 router.get("/:id", flightsCtrl.show);
+// GET - localhost:3000/flights/:id/edit
+router.get("/:id/edit", flightsCtrl.edit);
 
 //POST - localhost:3000
 router.post("/", flightsCtrl.create);
+router.post("/:id/tickets", flightsCtrl.createTicket);
 
-//POST - localhost:3000/flights/:id
+//DELETE - localhost:3000/flights/:id
 router.delete("/:id", flightsCtrl.delete);
+
+//PUT - localhost:3000/flights/:id
+router.put("/:id", flightsCtrl.update);
 
 export { router };

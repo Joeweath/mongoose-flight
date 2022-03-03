@@ -13,7 +13,27 @@
     <div><%= flight.flightNo %></div>
     <div>Departs: </div>
     <div><%= flight.departs %></div>
+    <div>
+      <%= flight.title %> 
+      <a href="/flights/<%= flight._id %>/edit">
+        <button>Edit Flight</button>
+      </a>
+    </div>
   </section>
+  <h2>Buy ticket</h2>
+  <form 
+    id="create-ticket"
+    action="/flights/<%= flight._id %>/ticket"
+    method="POST"
+  >
+  <label for="seat">Seat</label>
+  <input name="seat" id="seat" required pattern="[A-F][1-9]\d?">
+  <label for="price">Price:</label>
+  <input type="number" id="price">
+  <button type="submit">Add ticket</button>
+    
+    
+  </form>
 </main>
   
 <%- include('../partials/footer') %>

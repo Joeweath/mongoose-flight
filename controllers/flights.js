@@ -38,4 +38,33 @@ function deleteFlight(req, res) {
   });
 }
 
-export { newFlight as new, create, index, show, deleteFlight as delete };
+function edit(req, res) {
+  Flight.findById(req.params.id, function (err, flight) {
+    res.render("flights/edit", {
+      flight,
+      err,
+      title: "Edit Flight",
+    });
+  });
+}
+
+function update(req, res) {
+  Flight.findByIdAndUpdate(req.params.id, req.body, function (err, movie) {
+    res.redirect(`/flights/${req.params.id}`);
+  });
+}
+
+function createTicket(req, res) {
+  console.log("sanity check");
+}
+
+export {
+  newFlight as new,
+  create,
+  index,
+  show,
+  deleteFlight as delete,
+  edit,
+  update,
+  createTicket,
+};
